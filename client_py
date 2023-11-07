@@ -1,0 +1,20 @@
+import requests
+import json
+
+if __name__ == '__main__':
+    
+    # POST-запрос на сервер по эндпоинту add с параметром json:
+    r = requests.post('http://localhost:5000/predict', json=['auctuon', 'single_family_home', 4.0, True, 'southern pines', 2900, '28387', 'NC', False, '2010-s', 5.2])
+    
+    # Вывод статуса запроса:
+    print('Status code: {}'.format(r.status_code))
+    # Обработка результата:
+    if r.status_code == 200:
+
+        # Если запрос выполнен успешно (код обработки=200),
+        # Вывод результата на экран
+        print('Prediction: {}'.format(r.json()['prediction']))
+    else:
+        # если запрос завершён с кодом, отличным от 200,
+        # выводим содержимое ответа
+        print(r.text)
